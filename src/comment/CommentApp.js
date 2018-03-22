@@ -5,7 +5,7 @@ import CommentList from './commentComponent/CommentList';
 export default class CommentApp extends Component{
     render () {
         return (
-            <div>
+            <div className='wrapper'>
                 <CommentInput />
                 <CommentList />
             </div>
