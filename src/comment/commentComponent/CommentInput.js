@@ -8,14 +8,12 @@ export default class CommentInput extends Component {
             content: ''
         }
     }
-
     handleUserName(e) {
         let username = e.target.value;
         this.setState({
             username
         })
     }
-
     handleContent(e) {
         let content = e.target.value;
         this.setState({
@@ -24,9 +22,16 @@ export default class CommentInput extends Component {
     }
 
     handleSubmit(e) {
-        console.log('click submit');
+        if (this.props.onSubmitHandle) {
+           this.props.onSubmitHandle(Object.assign({}, this.state));
+        }
+        this.setState({
+            content: ''
+        })
     }
-
+    componentDidMount () {
+        this.textarea.focus();
+    }
     render() {
         return (
             <div className='comment-input'>
@@ -39,7 +44,8 @@ export default class CommentInput extends Component {
                 <div className='comment-field'>
                     <span className='comment-field-name'>评论内容:</span>
                     <div className='comment-field-input'>
-                        <textarea value={this.state.content} onChange={(e) => this.handleContent(e)}></textarea>
+                        <textarea value={this.state.content} onChange={(e) => this.handleContent(e)}
+                        ref={ t => this.textarea = t }></textarea>
                     </div>
                 </div>
                 <div className='comment-field-button'>

@@ -8,7 +8,7 @@ export default class CommentList extends Component{
     render () {
         return(
             <div>
-               <Comment/>
+                {this.props.comments.map((comment, index) => <Comment comment={comment} key={index}/> )}
             </div>
         )
     }
