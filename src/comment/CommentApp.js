@@ -10,6 +10,7 @@ export default class CommentApp extends Component {
         }
     }
     _saveComments (comments) {
+        // 保存评论数据到localStorage中
         localStorage.setItem('comments',JSON.stringify(comments));
     }
     _loadComments () {
@@ -38,21 +39,26 @@ export default class CommentApp extends Component {
         this.setState(prevState => ({
             comments: this.state.comments.concat(newComment)
         }));
+        this._saveComments(this.state.comments);
+    }
+    handleDeleteComment (index, e) {
+        // == 删除数据函数
+        const comments = this.state.comments;
+        comments.splice(index, 1);
+        this.setState({
+            comments: comments
+        });
+        // 保存删除评论后的数据到localStorage
+        this._saveComments(comments);
     }
     componentWillMount () {
         this._loadComments();
-    }
-    shouldComponentUpdate (nextProps, nextState) {
-        if (nextState.comments.length !== this.state.comments.length) {
-            this._saveComments(nextState.comments);
-            return true;
-        }
     }
     render() {
         return (
             <div className='wrapper'>
                 <CommentInput onSubmitHandle={(e) => this.onSubmitHandle(e)}/>
-                <CommentList comments={this.state.comments}/>
+                <CommentList comments={this.state.comments} onDeleteComment={ (e) => this.handleDeleteComment(e)}/>
             </div>
         )
     }
