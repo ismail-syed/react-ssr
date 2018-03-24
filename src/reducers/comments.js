@@ -1,7 +1,7 @@
 // action.types
 const INIT_COMMENTS = 'INIT_COMMENTS';
-const ADD_COMMENTS = 'ADD_COMMENTS';
-const DELETE_COMMENTS = 'DELETE_COMMENTS';
+const ADD_COMMENT = 'ADD_COMMENT';
+const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // reducer
 export default function (state, action) {
@@ -13,12 +13,12 @@ export default function (state, action) {
         case INIT_COMMENTS:
             return {comments: action.comments};
         // 新增评论
-        case ADD_COMMENTS:
+        case ADD_COMMENT:
             return {
-                comments: [...state.comments, action.comments]
+                comments: [...state.comments, action.comment]
             };
         // 删除评论
-        case DELETE_COMMENTS:
+        case DELETE_COMMENT:
             return {
                 comments: [
                     ...state.comments.slice(0, action.commentIndex),
@@ -28,4 +28,17 @@ export default function (state, action) {
         default:
             return state;
     }
+}
+
+//action creators
+export const initComments = (comments) => {
+    return {type:INIT_COMMENTS,comments};
+}
+
+export const addComment = (comment) => {
+    return {type:ADD_COMMENT, comment};
+}
+
+export const deleteComment = (commentIndex) => {
+    return {type:DELETE_COMMENT,commentIndex};
 }
