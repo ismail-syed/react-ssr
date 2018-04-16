@@ -11,6 +11,33 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'stylus-loader'
+        ]
+      },
+      {
+        test: /\.(jpeg|jpg|gif|svg|png)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 244,
+              name: '[name]-zsmart.[ext]'
+            }
+          }
+        ]
       }
     ]
   }
