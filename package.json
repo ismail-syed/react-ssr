@@ -1,0 +1,28 @@
+{
+  "name": "simple-vue-todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chun5398/simple-vue-todo.git"
+  },
+  "author": "chunyangqiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chun5398/simple-vue-todo/issues"
+  },
+  "homepage": "https://github.com/chun5398/simple-vue-todo#readme",
+  "dependencies": {
+    "vue": "^2.5.16"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "vue-loader": "^14.2.2",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.5.0"
+  }
+}
