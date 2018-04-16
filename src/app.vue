@@ -6,7 +6,7 @@
 export default {
   data () {
     return {
-      text: 'Hello vue'
+      text: 'Hello vue '
     }
   }
 }
