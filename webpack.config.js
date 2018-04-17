@@ -1,13 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
-
-const isDev =  process.env.NODE_ENV === 'development';
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
   entry: path.join(__dirname, 'src/index.js'),
   output: {
-    filename: '[name].[hash].js',
+    filename: 'bundle.[hash].js',
     path: path.join(__dirname, 'dist')
   },
   module: {
@@ -19,27 +19,6 @@ const config = {
       {
         test: /\.(jsx|js)$/,
         loader: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ]
-      },
-      {
-        test: /\.styl$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          'stylus-loader'
-        ]
       },
       {
         test: /\.(jpeg|jpg|gif|svg|png)$/,
@@ -66,6 +45,20 @@ const config = {
 }
 
 if (isDev) {
+  config.module.rules.push({
+    test: /\.styl$/,
+    use: [
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true
+        }
+      },
+      'stylus-loader'
+    ]
+  });
   config.devtool = '#cheap-module-eval-source-map';
   config.devServer = {
     port: 3000,
@@ -80,6 +73,25 @@ if (isDev) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   )
+} else {
+  config.output.filename = '[name].[chunkhash:8].js';
+  config.module.rules.push({
+    test: /\.styl$/,
+    use: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: [
+        'css-loader',
+        {
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: true
+          }
+        },
+        'stylus-loader'
+      ]
+    })
+  });
+  config.plugins.push(new ExtractTextPlugin('styles.[hash].css'))
 }
 
 module.exports = config;
