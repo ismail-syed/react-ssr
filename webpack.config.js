@@ -7,7 +7,7 @@ const isDev =  process.env.NODE_ENV === 'development';
 const config = {
   entry: path.join(__dirname, 'src/index.js'),
   output: {
-    filename: 'bundle.js',
+    filename: '[name].[hash].js',
     path: path.join(__dirname, 'dist')
   },
   module: {
@@ -17,14 +17,14 @@ const config = {
         loader: 'vue-loader'
       },
       {
-        test: /\.jsx$/,
+        test: /\.(jsx|js)$/,
         loader: 'babel-loader'
       },
       {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader'
+          'css-loader',
         ]
       },
       {
