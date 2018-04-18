@@ -70,10 +70,12 @@ if (isDev) {
     // open: true
   };
   config.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   )
 } else {
+  config.entry = {
+    app: path.join(__dirname, './src/index.js'),
+  }
   config.output.filename = '[name].[chunkhash:8].js';
   config.module.rules.push({
     test: /\.styl$/,
@@ -91,7 +93,15 @@ if (isDev) {
       ]
     })
   });
-  config.plugins.push(new ExtractTextPlugin('styles.[hash].css'))
+  config.optimization = {
+    splitChunks: {
+      chunks: 'all'
+    },
+    runtimeChunk: true
+  }
+  config.plugins.push(
+    new ExtractTextPlugin('[name].zsmart.[hash].css'),
+  )
 }
 
 module.exports = config;
