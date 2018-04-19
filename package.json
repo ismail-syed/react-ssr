@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && webpack --config build/webpack.prod.config.js --mode production",
-    "dev": "rimraf dist && webpack-dev-server --config build/webpack.dev.config.js --mode development"
+    "dev": "rimraf dist && webpack-dev-server --config build/webpack.dev.config.js",
+    "build": "rimraf dist && webpack --config build/webpack.prod.config.js"
   },
   "repository": {
     "type": "git",

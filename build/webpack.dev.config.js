@@ -5,17 +5,16 @@ const baseConfig = require('./webpack.base.config');
 
 const devConfig = webpackMerge(baseConfig, {
   mode: 'development',
+  devtool: 'cheap-module-eval-source-map',
   devServer: {
     host: '0.0.0.0',
     port: 8000,
-    contentBase: path.join(__dirname, '../dist'),
     overlay: {
       errors: true
-    }
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    },
+    compress: true,
+    contentBase: path.join(__dirname, '../dist')
+  }
 });
 
 module.exports = devConfig;
