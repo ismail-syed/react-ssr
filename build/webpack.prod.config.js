@@ -16,6 +16,9 @@ const prodConfig = webpackMerge(baseConfig, {
   },
   plugins: [
     new webpack.BannerPlugin('天府银行 版权所有'),
+    new webpack.DefinePlugin({
+      __DEV__: false
+    }),
     new ExtractTextWebpackPlugin({
       filename: '[name].[hash].css',
       allChunks: true
