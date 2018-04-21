@@ -8,11 +8,14 @@ const prodConfig = webpackMerge(baseConfig, {
   mode: 'production',
   optimization: {
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      name: 'vendor'
     },
-    minimize: true
+    minimize: true,
+    mergeDuplicateChunks: true
   },
   plugins: [
+    new webpack.BannerPlugin('天府银行 版权所有'),
     new ExtractTextWebpackPlugin({
       filename: '[name].[hash].css',
       allChunks: true

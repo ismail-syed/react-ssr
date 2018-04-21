@@ -3,7 +3,7 @@ const HTMLPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: path.join(__dirname, '../src/index.js'),
   output: {
-    filename: 'zsmart.[name].[hash].js',
+    filename: '[name].[contenthash].min.js',
     path: path.join(__dirname, '../dist')
   },
   module: {
@@ -33,7 +33,8 @@ module.exports = {
   },
   plugins: [
     new HTMLPlugin({
-      template: path.join(__dirname, '../public/index.html')
+      template: path.join(__dirname, '../public/index.html'),
+      inject: true
     })
   ]
 }
