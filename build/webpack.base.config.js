@@ -1,4 +1,5 @@
 const path = require('path');
+const consola = require('consola');
 
 const baseConfig = {
   entry: path.join(__dirname, '../src/index.js'),
