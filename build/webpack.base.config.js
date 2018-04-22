@@ -1,6 +1,6 @@
 const path = require('path');
-const HTMLPlugin = require('html-webpack-plugin');
-module.exports = {
+
+const baseConfig = {
   entry: path.join(__dirname, '../src/index.js'),
   output: {
     filename: '[name].[contenthash].min.js',
@@ -38,3 +38,5 @@ module.exports = {
     ]
   }
 }
+
+module.exports = baseConfig;
