@@ -25,7 +25,7 @@ const prodConfig = webpackMerge(baseConfig, {
       allChunks: true
     }),
     new HtmlPlugin({
-      template: path.join(__dirname, '../public/index.html'),
+      template: path.join(__dirname, '../index.html'),
       minify: {
         removeEmptyAttributes: true,
         collapseWhitespace: true

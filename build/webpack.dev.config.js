@@ -34,7 +34,7 @@ const devConfig = webpackMerge(baseConfig, {
       filename: '[name].[hash].css'
     }),
     new HtmlPlugin({
-      template: path.join(__dirname, '../public/index.html'),
+      template: path.join(__dirname, '../index.html'),
       inject: true
     })
   ]
