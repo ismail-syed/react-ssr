@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const HtmlPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
 
@@ -22,6 +23,13 @@ const prodConfig = webpackMerge(baseConfig, {
     new ExtractTextWebpackPlugin({
       filename: '[name].[hash].css',
       allChunks: true
+    }),
+    new HtmlPlugin({
+      template: path.join(__dirname, '../public/index.html'),
+      minify: {
+        removeEmptyAttributes: true,
+        collapseWhitespace: true
+      }
     })
   ]
 });
