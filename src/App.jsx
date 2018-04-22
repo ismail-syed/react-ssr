@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './container/Header.jsx'
+import Header from './container/Header'
 
 export default class App extends React.Component {
   constructor() {

@@ -6,6 +6,9 @@ const baseConfig = {
     filename: '[name].[contenthash].min.js',
     path: path.join(__dirname, '../dist')
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {
