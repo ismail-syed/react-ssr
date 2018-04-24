@@ -1,4 +1,7 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const isDev = process.env.NODE_ENV !== 'production';
 
 const baseConfig = {
   entry: path.join(__dirname, '../src/index.js'),
@@ -34,12 +37,18 @@ const baseConfig = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].[contenthahs].css",
+    })
+  ]
 }
 
 module.exports = baseConfig;

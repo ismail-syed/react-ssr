@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const HtmlPlugin = require('html-webpack-plugin');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
 
 const devConfig = webpackMerge(baseConfig, {
@@ -26,13 +25,6 @@ const devConfig = webpackMerge(baseConfig, {
   },
   plugins: [
     new webpack.BannerPlugin('天府银行 版权所有'),
-    new webpack.DefinePlugin({
-      __DEV__: true
-    }),
-    new ExtractTextWebpackPlugin({
-      allChunks: true,
-      filename: '[name].[hash].css'
-    }),
     new HtmlPlugin({
       template: path.join(__dirname, '../index.html'),
       inject: true

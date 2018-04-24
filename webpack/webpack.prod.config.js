@@ -2,7 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const HtmlPlugin = require('html-webpack-plugin');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const UglifyJS = require('uglifyjs-webpack-plugin');
+const OptimizCssAssets = require('optimize-css-assets-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
 
 const prodConfig = webpackMerge(baseConfig, {
@@ -10,20 +11,30 @@ const prodConfig = webpackMerge(baseConfig, {
   optimization: {
     splitChunks: {
       chunks: 'all',
-      name: 'vendor'
+      name: 'vendor',
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          priority: 10,
+          chunks: 'initial'
+        },
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          minChunks: 2,
+          enforce: true,
+        }
+      }
     },
-    minimize: true,
+    minimizer: [
+      new UglifyJS({}),
+      new OptimizCssAssets({})
+    ],
     mergeDuplicateChunks: true
   },
   plugins: [
     new webpack.BannerPlugin('天府银行 版权所有'),
-    new webpack.DefinePlugin({
-      __DEV__: false
-    }),
-    new ExtractTextWebpackPlugin({
-      filename: '[name].[hash].css',
-      allChunks: true
-    }),
     new HtmlPlugin({
       template: path.join(__dirname, '../index.html'),
       minify: {
