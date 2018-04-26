@@ -5,6 +5,9 @@ module.exports = {
   output: {
     filename: '[name].[hash].js'
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {
