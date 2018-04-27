@@ -5,8 +5,9 @@ const HtmlPlugin = require('html-webpack-plugin')
 const baseConfig = require('./base.config')
 
 const isDev = process.env.NODE_ENV === 'development'
-console.log(isDev)
+console.log(isDev);
 const clientConfig = merge(baseConfig, {
+  mode: 'production',
   entry: {
     app: path.join(__dirname, '../client/index.js')
   },
@@ -16,13 +17,13 @@ const clientConfig = merge(baseConfig, {
   plugins: [
     new HtmlPlugin({
       template: path.join(__dirname, '../client/template.html'),
-      inject: true
     })
   ]
 })
 
 if (isDev) {
-  entry: {
+  clientConfig.mode = 'development'
+  clientConfig.entry = {
     app: [
       'react-hot-loader/patch',
       path.join(__dirname, '../client/index.js')
