@@ -1,0 +1,39 @@
+{
+  "name": "react-isomorphic",
+  "version": "1.0.0",
+  "description": "> 基于webpack3、React16实现React项目的前后端同构 <br>",
+  "main": "render.js",
+  "scripts": {
+    "build": "npm run clear && webpack --config build/webpack.client.js --mode production",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.client.js --mode development",
+    "clear": "rimraf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chun5398/react-isomorphic.git"
+  },
+  "author": "YangQiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chun5398/react-isomorphic/issues"
+  },
+  "homepage": "https://github.com/chun5398/react-isomorphic#readme",
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.2",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3",
+    "webpack-merge": "^4.1.2"
+  }
+}
