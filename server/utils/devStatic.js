@@ -2,8 +2,9 @@ const path = require('path');
 const axios = require('axios');
 const webpack = require('webpack');
 const MemoryFs = require('memory-fs');
-const serverConfig = require('../../webpack/server.config');
 const ReactSSR = require('react-dom/server');
+const proxy = require('http-proxy-middleware');
+const serverConfig = require('../../webpack/server.config');
 
 const getTemplate = () => {
   return new Promise((resolve, reject) => {
@@ -18,7 +19,7 @@ const getTemplate = () => {
 let serverBundle;
 
 const ModuleInstead = module.constructor;
-const mfs = MemoryFs();
+const mfs = new MemoryFs;
 const serverCompiler = webpack(serverConfig);
 // 编译后服务端代码输出到内存中
 serverCompiler.outputFileSystem = mfs;
@@ -33,12 +34,17 @@ serverCompiler.watch({}, (err, stats) => {
   // 打包编译后的服务端文件路径
   const bundlePath = path.join(serverConfig.output.path, serverConfig.output.filename);
   const bundle = mfs.readFileSync(bundlePath, 'utf-8');
+  // hack
   const m = new ModuleInstead();
-  m._compile(bundle,'serverEntry');
-  serverBundle = m.default;
+  m._compile(bundle, 'serverEntry.js');
+  // 挂载到exports.default下
+  serverBundle = m.exports.default;
 })
 
 module.exports = (app) => {
+  app.use('/public', proxy({
+    target: 'http://localhost:8000'
+  }))
   app.get('*', (req, res) => {
     getTemplate().then(template => {
       const content = ReactSSR.renderToString(serverBundle);
