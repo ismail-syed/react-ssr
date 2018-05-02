@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
-const CleanPlugin = require('clean-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -23,7 +22,7 @@ const config = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: [
-          path.join(__dirname, '.../dist')
+          path.join(__dirname, '.../node_modules')
         ]
       },
       {
@@ -35,8 +34,7 @@ const config = {
   plugins: [
     new HtmlPlugin({
       template: path.join(__dirname, '../index.html')
-    }),
-    new CleanPlugin('dist')
+    })
   ]
 }
 

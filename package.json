@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build:client": "cross-env NODE_ENV=production webpack --config ./webpack/client.config.js --mode production",
-    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/client.config.js --mode development"
+    "build:server": "cross-env NODE_ENV=production webpack --config ./webpack/server.config.js --mode production",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/client.config.js --mode development",
+    "dev:server": "cross-env NODE_ENV=development node ./server/server.js",
+    "clear": "rimraf dist",
+    "build": "npm run clear && npm run build:client && npm run build:server"
   },
   "repository": {
     "type": "git",
@@ -32,10 +36,10 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^5.1.4",
     "html-webpack-plugin": "^3.2.0",
     "react-hot-loader": "^4.1.2",
+    "rimraf": "^2.6.2",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^3.1.3"
