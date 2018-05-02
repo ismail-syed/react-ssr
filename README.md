@@ -1,10 +1,10 @@
-# Isomorphic-react
+# React-SSR
 
 React + MobX + React-Router (CSR & SSR)
 
-> 基于webpack3、React16实现React项目的前后端同构 <br>
+> 基于webpack4、React16实现React服务端渲染项目模板 <br>
 
 ## How to use
 ```
-  T
+  npm install
 ```
