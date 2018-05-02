@@ -27,10 +27,13 @@
   "homepage": "https://github.com/chun5398/react-ssr#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "mobx": "^4.2.0",
     "mobx-react": "^5.1.2",
     "prop-types": "^15.6.1",
+    "query-string": "^6.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-router": "^4.2.0",
