@@ -41,6 +41,12 @@ const config = {
 }
 
 if (isDev) {
+  config.entry = {
+    client: [
+      "react-hot-loader/patch",
+      path.join(__dirname, '../client/index.js')
+    ]
+  }
   config.devServer = {
     host: '0.0.0.0',
     port: '8000',

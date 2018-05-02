@@ -1,8 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import App from './views/App';
 
-ReactDOM.render(
-  <App />,
-  document.querySelector('#root')
-)
+const root = document.querySelector('#root');
+
+const render = (Component) => {
+  ReactDOM.hydrate(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    root
+  )
+}
+
+render(App);
+
+if (module.hot) {
+  module.hot.accept('./views/App', () => {
+    const NextApp = require('./views/App').default
+    render(NextApp);
+  })
+}
