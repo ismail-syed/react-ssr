@@ -14,6 +14,7 @@ const config = {
   resolve: {
     extensions: ['.js','.jsx']
   },
+  externals: Object.keys(require('../package.json').dependencies),
   module: {
     rules: [
       {
