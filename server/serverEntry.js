@@ -2,6 +2,7 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import { Provider, useStaticRendering } from 'mobx-react';
 import App from '../client/views/App';
+import { createStoreMap } from '../client/store/store';
 
 // 防止mobx在服务端渲染时发生数据变化
 useStaticRendering(true);
@@ -15,3 +16,5 @@ export default (stores,routerContext,url) => {
     </Provider>
   )
 };
+
+export { createStoreMap }
